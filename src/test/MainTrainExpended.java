@@ -36,8 +36,6 @@ public class MainTrainExpended {
 			System.out.println("your getTile is wrong (-2)");
 		
 	}
-	
-	
 
 	private static Tile[] get(String s) {
 		Tile[] ts=new Tile[s.length()];
@@ -48,7 +46,6 @@ public class MainTrainExpended {
 		}
 		return ts;
 	}
-
 	public static void testBoard() {
 		Board b = Board.getBoard();
 		if(b!=Board.getBoard())
@@ -95,6 +92,17 @@ public class MainTrainExpended {
 		int bitpoint = b.tryPlaceWord(bit);
 		if(bitpoint!=22)
 			System.out.println("bitpoint should be 22 (-15)");
+		//expend 1
+		/*Word ahi=new Word(get("A_I"), 6, 5, true);
+		if(b.tryPlaceWord(ahi)!=16)
+			System.out.println("AHI should be 16 (-15)");
+		Word al=new Word(get("AL"), 6, 9, true);
+		if(b.tryPlaceWord(al)!=16)
+			System.out.println("AL should be 16 (-15)");
+		Word ran=new Word(get("R_N"), 6, 6, false);
+		if(b.tryPlaceWord(ran)!=16)
+			System.out.println("RAN should be 16 (-15)");*/
+		//expend 2
 		Word bit2=new Word(get("S_TA"), 9, 4, true);
 		if(b.tryPlaceWord(bit2)!=28)
 			System.out.println("SBTA should be 28 (-15)");
@@ -105,10 +113,6 @@ public class MainTrainExpended {
 		Word bit4=new Word(get("ABA"),0,12,false);
 		if(b.tryPlaceWord(bit4)!=0)//not adjust to any tile in graph
 			System.out.println("ABA should be 0 (-15)");
-		/*Word bit7=new Word(get("ABA"),4,7,false);
-		if(b.tryPlaceWord(bit7)!=0)//There isn't tile 'b' left, but can get 100 anyway if the program stack here.
-			System.out.println("ABA should be 0 (-15)");
-*/
 		Word bit5=new Word(get("ADEL"),3,11,false);
 		if(b.tryPlaceWord(bit5)!=0)//Not legal.
 			System.out.println("ADEL should be 0 (-15)");
