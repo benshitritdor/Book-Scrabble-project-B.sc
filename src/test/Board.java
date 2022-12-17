@@ -43,7 +43,7 @@ public class Board {
     }
 
     //****************** assistant functions for boardLegal ******************//
-    public boolean consistInBoard(Word word){
+    private boolean consistInBoard(Word word){
         if(word.getRow()<0 || word.getRow()>14 || word.getCol()<0 || word.getCol()>14)
             return false;
         int length = word.getTiles().length;
@@ -54,7 +54,7 @@ public class Board {
             return word.getCol() + length - 1 <= 14;
         }
     }
-    public boolean wellFirstPlay(Word word){
+    private boolean wellFirstPlay(Word word){
         if(word.getVertical()){
             if(word.getCol()!=7)
                 return false;
@@ -68,7 +68,7 @@ public class Board {
                 return word.getCol() <= 7 && word.getCol() + word.getTiles().length - 1 >= 7;
         }
     }
-    public boolean identicalLetters(Word word){
+    private boolean identicalLetters(Word word){
     int index;
     for (int i = 0; i < word.tiles.length; i++) {
         if(word.tiles[i]==null) {
@@ -87,7 +87,7 @@ public class Board {
     //if there isn't override enough to check if tile exists on the word path's.
     return false;
     }
-    public boolean overRide(Word word){
+    private boolean overRide(Word word){
         int index ;
         for (int i = 0; i < word.getTiles().length; i++) {
             if(word.getVertical())
@@ -104,9 +104,9 @@ public class Board {
         }
         return false;
         }
-    public boolean adjustLetters(Word word){
+    private boolean adjustLetters(Word word){
         int length = word.getTiles().length;
-        for (int i = 0; i < word.getTiles().length; i++) {
+        for (int i = 0; i < length; i++) {
             if(word.getVertical()){
                 if(word.getRow()>0 && board[word.getRow()-1][word.getCol()]!=null)
                     return true;
@@ -156,7 +156,7 @@ public class Board {
     }
 
     //****************** assistant functions for getWords ******************//
-    public Tile tileInPlace(Word word, int i , int j) {
+    private Tile tileInPlace(Word word, int i , int j) {
         //return tile on board or going to be in board(from input word),if there isn't return null
         //check if there is a tile in board[i][j]
         if(board[i][j]!=null)
@@ -191,7 +191,7 @@ public class Board {
         }
         return null;
     }//return the specific Tile in the Input word while given place [i,j] in board
-    public int lengthNewWord(Word word,int row,int col,boolean vertical){//[row,col] it the index to check consider the vertical direction.
+    private int lengthNewWord(Word word,int row,int col,boolean vertical){//[row,col] it the index to check consider the vertical direction.
         int i = row;
         int j = col;
         int k;
@@ -220,7 +220,7 @@ public class Board {
         }
         return length;
     }
-    public int setNewIndex(Word word,int row,int col,boolean vertical){
+    private int setNewIndex(Word word,int row,int col,boolean vertical){
         int i = row;
         int j = col;
         if(vertical) {
@@ -232,7 +232,7 @@ public class Board {
             return ++j;
         }
     }//return the row/col index that are going to change
-    public Tile[] setNewTileArray(Word word,int row,int col,int length,boolean vertical){
+    private Tile[] setNewTileArray(Word word,int row,int col,int length,boolean vertical){
         int i = row;
         int j = col;
         Tile[] tiles = new Tile[length];
@@ -242,7 +242,7 @@ public class Board {
             for (int t = 0; t < length; t++) tiles[t] = tileInPlace(word,i,j+t);
         return tiles;
     }
-    public Word setNewColWord(Word word,int delta){
+    private Word setNewColWord(Word word,int delta){
         int i = word.getRow() ;
         int j = word.getCol()+delta;
         int length = lengthNewWord(word,i,j,true);
@@ -250,7 +250,7 @@ public class Board {
         Tile[] tiles = setNewTileArray(word,i,j,length,true);
         return new Word(tiles,i,j,true);
     }
-    public Word setNewRowWord(Word word,int delta){
+    private Word setNewRowWord(Word word,int delta){
         int i = word.getRow() +delta;
         int j = word.getCol();
         int length = lengthNewWord(word,i,j,false);
@@ -286,7 +286,7 @@ public class Board {
     }
 
     //****************** assistant functions for getScore ******************//
-    public int lettersBonus(Word word) {
+    private int lettersBonus(Word word) {
         int counterBonus = 0;
         if (word.getVertical()) {
             for (int i = 0; i < word.getTiles().length; i++) {
@@ -310,7 +310,7 @@ public class Board {
         }
         return counterBonus;
     }
-    public int wordsBonus(Word word,int currentScore){
+    private int wordsBonus(Word word,int currentScore){
         int counterBonus = currentScore;
         if (word.getVertical()) {
             for (int i = 0; i < word.getTiles().length; i++) {
@@ -343,7 +343,7 @@ public class Board {
     }
 
     //****************** assistant functions for tryPlaceWord ******************//
-    public void implementWordOnBoard(Word word){
+    private void implementWordOnBoard(Word word){
         int length = word.getTiles().length;
         int row = word.getRow();
         int col = word.getCol();
